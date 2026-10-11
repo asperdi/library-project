@@ -1,7 +1,7 @@
 const myLibrary = [];
 const library = document.querySelector(".library");
 
-function Book(author, title, number_of_pages, read){
+function Book(title, author, number_of_pages, read){
     this.id = crypto.randomUUID();
     this.title = title;
     this.author = author;
@@ -15,40 +15,44 @@ function addBookToLibrary(parameters){
 }
 
 function displayBooks(book_array){
-    const div = document.createElement('div');
-    div.classList.add('BookList');
 
     for(book of book_array){
-        for(prop in book){
+        const div = document.createElement('div');
+
+        div.classList.add('BookList');
+        for(prop in book){            
+            const p = document.createElement('p');
+            const content = book[prop];
             switch(prop){
                 case 'title':
                     let h3 = document.createElement('h3');
-                    h3.textContent = book[prop];
+                    h3.textContent = content;
                     div.append(h3);
                     break;
                 case 'read':
-                     const par = document.createElement('p');
-                     par.textContent = book[prop] ? 'Read' : 'Unread';
-                     div.append(par);
+                     p.textContent = content ? 'Read' : 'Unread';
                      break;
                 case 'id':
                     break;
+                case 'number_of_pages':
+                    p.textContent =  `${content} pages`;
+                    break;
                 default:
-                     const p = document.createElement('p');
-                     p.textContent = book[prop];
-                     div.append(p);
+                     p.textContent = content;
                      break;
 
             }
+            div.append(p);
         }
+        
+    library.append(div);
     }
 
-    library.append(div);
 }
 
 addBookToLibrary(['Kroniki', 'Gall Anonim', 400, false]);
 addBookToLibrary(['Hobbit','Tolkien',  300, true]);
-addBookToLibrary([ 'LOTR','Tolkien',  1200, true]);
+addBookToLibrary([ 'The count of monte cristo','Tolkien',  1200, true]);
 
 
 displayBooks(myLibrary);
