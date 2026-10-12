@@ -26,6 +26,7 @@ function displayBooks(book_array){
 
     const book = book_array.at(-1);
         const div = document.createElement('div');
+        div.classList.add('card');
 
         div.classList.add('BookList');
         for(prop in book){            
@@ -41,6 +42,7 @@ function displayBooks(book_array){
                      p.textContent = content ? 'Read' : 'Unread';
                      break;
                 case 'id':
+                    div.dataset.indexNumber = book[prop];
                     break;
                 case 'number_of_pages':
                     p.textContent =  `${content} pages`;
@@ -52,6 +54,20 @@ function displayBooks(book_array){
             }
             div.append(p);
         }
+        const button = document.createElement('button');
+        button.classList.add('RemoveBook');
+        button.textContent = 'Delete';
+        button.addEventListener('click', () => {
+            const id_number = button.parentElement.dataset.indexNumber;
+            for(books of myLibrary){
+                if(book.id == id_number){ 
+                    myLibrary.splice(myLibrary.indexOf(book), 1);
+                    break;
+                }
+            }
+            button.parentElement.remove();
+        })
+        div.append(button);
         
     library.append(div);
     

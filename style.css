@@ -1,8 +1,8 @@
 :root{
     --background: #f0eef1;
     --card_background: #fffbfb;
-    --add_book: #e2e2e2;
-    --add_book_hover: #ebebeb;
+    --add_book: #d0d0d0;
+    --add_book_hover: #c8c7c7;
     --button: #000;
     --button_hover: #424242;
 }
@@ -58,6 +58,18 @@ h3{
 
 p{
     font-size: 1.2rem;
+}
+
+.card button{
+    width: 80%;
+    padding: 8px;
+    border: none;
+    border-radius: 10px;
+    font-size: inherit;
+}
+
+.card button:hover{
+    background-color: red;
 }
 
 dialog{
