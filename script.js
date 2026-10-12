@@ -1,5 +1,6 @@
 const myLibrary = [];
 const library = document.querySelector(".library");
+const add_book = document.querySelector(".AddBookDialog");
 
 function Book(title, author, number_of_pages, read){
     this.id = crypto.randomUUID();
@@ -16,7 +17,7 @@ function addBookToLibrary(parameters){
 
 function displayBooks(book_array){
 
-    for(book of book_array){
+    const book = book_array.at(-1);
         const div = document.createElement('div');
 
         div.classList.add('BookList');
@@ -46,13 +47,11 @@ function displayBooks(book_array){
         }
         
     library.append(div);
-    }
+    
 
 }
 
-addBookToLibrary(['Kroniki', 'Gall Anonim', 400, false]);
-addBookToLibrary(['Hobbit','Tolkien',  300, true]);
-addBookToLibrary([ 'The count of monte cristo','Tolkien',  1200, true]);
-
-
-displayBooks(myLibrary);
+add_book.addEventListener('click', () => {
+    addBookToLibrary(['O zaletach ignorancji czyli o zaletach ignorancji, czyli co my tak właściwie robimy', 'b', 300, true]);
+    displayBooks(myLibrary);
+});

@@ -1,6 +1,8 @@
 :root{
     --background: #f0eef1;
     --card_background: #fffbfb;
+    --add_book: #e2e2e2;
+    --add_book_hover: #ebebeb;
 }
 
 *{
@@ -13,12 +15,14 @@ body{
     background-color: var(--background);
     padding: 20px;  
     font-family: 'Lato', sans-serif;
+    width: 100vw;
+    height: 100vh;
 }
 
 .library{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    grid-template-rows: repeat(auto-fill, 300px);
+    grid-auto-rows: 300px;
     gap: 1rem;
 }
 
@@ -32,16 +36,34 @@ body{
     padding: 10px;
 }
 
+.AddBook{
+    background-color: var(--add_book);
+    border: 1px solid #000;
+    border-radius: 10px;
+}
+
+.AddBook:hover{
+    cursor: pointer;
+    background-color: var(--add_book_hover);
+}
+
 h3{
     font-size: 1.5rem;
       overflow: hidden;
    text-overflow: ellipsis;
    display: -webkit-box;
-   -webkit-line-clamp: 2; /* number of lines to show */
-           line-clamp: 2;
+   -webkit-line-clamp: 3; 
+           line-clamp: 3;
    -webkit-box-orient: vertical;
 }
 
 p{
     font-size: 1.2rem;
+}
+
+dialog{
+    position: absolute;
+    left: 35vw;
+    top: 15vw;
+    border: none;
 }
