@@ -1,6 +1,13 @@
 const myLibrary = [];
 const library = document.querySelector(".library");
+const show_modal = document.querySelector(".AddBook");
 const add_book = document.querySelector(".AddBookDialog");
+const dialog = document.querySelector("dialog");
+const cancel = document.querySelector(".Cancel");
+const book_title = document.querySelector("#book_name");
+const book_author = document.querySelector("#book_author");
+const page_number = document.querySelector("#page_number");
+const read = document.querySelector("#read");
 
 function Book(title, author, number_of_pages, read){
     this.id = crypto.randomUUID();
@@ -51,7 +58,30 @@ function displayBooks(book_array){
 
 }
 
-add_book.addEventListener('click', () => {
-    addBookToLibrary(['O zaletach ignorancji czyli o zaletach ignorancji, czyli co my tak właściwie robimy', 'b', 300, true]);
+function close(){
+    dialog.close();
+    book_title.value = '';
+    book_author.value = '';
+    page_number.value = '';
+}
+
+show_modal.addEventListener('click', () => {
+    dialog.showModal();
+});
+
+read.addEventListener('click', () => {
+    if(read.textContent == 'Read') read.textContent = 'Unread';
+    else read.textContent = 'Read';
+});
+
+add_book.addEventListener('click', (e) => {
+    e.preventDefault();
+    addBookToLibrary([book_title.value, book_author.value, page_number.value, read.textContent == 'Read']);
+    close();
     displayBooks(myLibrary);
+});
+
+cancel.addEventListener('click', (e) => {
+    e.preventDefault();
+    close();
 });
