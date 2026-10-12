@@ -3,6 +3,8 @@
     --card_background: #fffbfb;
     --add_book: #e2e2e2;
     --add_book_hover: #ebebeb;
+    --button: #000;
+    --button_hover: #424242;
 }
 
 *{
@@ -15,8 +17,6 @@ body{
     background-color: var(--background);
     padding: 20px;  
     font-family: 'Lato', sans-serif;
-    width: 100vw;
-    height: 100vh;
 }
 
 .library{
@@ -38,12 +38,11 @@ body{
 
 .AddBook{
     background-color: var(--add_book);
-    border: 1px solid #000;
+    border: none;
     border-radius: 10px;
 }
 
 .AddBook:hover{
-    cursor: pointer;
     background-color: var(--add_book_hover);
 }
 
@@ -62,8 +61,67 @@ p{
 }
 
 dialog{
-    position: absolute;
-    left: 35vw;
-    top: 15vw;
     border: none;
+    position: absolute;
+    margin: auto;
+    padding: 10px;
+    width: 30%;
+    border-radius: 10px;
+}
+
+
+form{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: inherit;
+    font-size: 100%;
+}
+
+input, form button{
+    padding: 5px;
+}
+
+input{
+    outline:none;
+    border-radius: 5px;
+    border: 1px solid #868686;
+    caret-color: transparent;
+}
+
+input:focus{
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+form button{
+    background-color: var(--button);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+}
+
+form button:hover{
+    background-color: var(--button_hover);
+}
+
+.read{
+    background-color: rgb(30, 160, 30);
+}
+
+.read:hover{
+    background-color: rgb(2, 188, 2);
+}
+
+.unread{
+    background-color: rgb(254, 6, 6);
+}
+
+.unread:hover{
+    background-color: rgb(187, 1, 1);
 }

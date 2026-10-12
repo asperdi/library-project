@@ -63,6 +63,9 @@ function close(){
     book_title.value = '';
     book_author.value = '';
     page_number.value = '';
+    read.textContent = 'Read';
+    read.classList.add('read');
+    read.classList.remove('unread');
 }
 
 show_modal.addEventListener('click', () => {
@@ -72,6 +75,8 @@ show_modal.addEventListener('click', () => {
 read.addEventListener('click', () => {
     if(read.textContent == 'Read') read.textContent = 'Unread';
     else read.textContent = 'Read';
+    read.classList.toggle('read');
+    read.classList.toggle('unread');
 });
 
 add_book.addEventListener('click', (e) => {
