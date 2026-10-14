@@ -17,6 +17,10 @@ function Book(title, author, number_of_pages, read){
     this.read = read;
 }
 
+Book.prototype.ChangeReadStatus = function(){
+    this.read = !this.read;
+}
+
 function addBookToLibrary(parameters){
    const newBook = new Book(...parameters);
    myLibrary.push(newBook);
@@ -25,31 +29,49 @@ function addBookToLibrary(parameters){
 function displayBooks(book_array){
 
     const book = book_array.at(-1);
-        const div = document.createElement('div');
-        div.classList.add('card');
+    const div = document.createElement('div');
+    div.classList.add('card');
 
-        div.classList.add('BookList');
-        for(prop in book){            
-            const p = document.createElement('p');
-            const content = book[prop];
-            switch(prop){
-                case 'title':
-                    let h3 = document.createElement('h3');
-                    h3.textContent = content;
-                    div.append(h3);
-                    break;
-                case 'read':
-                     p.textContent = content ? 'Read' : 'Unread';
-                     break;
-                case 'id':
-                    div.dataset.indexNumber = book[prop];
-                    break;
-                case 'number_of_pages':
-                    p.textContent =  `${content} pages`;
-                    break;
+    div.classList.add('BookList');
+    for(prop in book){            
+        const p = document.createElement('p');
+        const content = book[prop];
+        switch(prop){
+            case 'ChangeReadStatus':
+                break;
+            case 'title':
+                let h3 = document.createElement('h3');
+                h3.textContent = content;
+                div.append(h3);
+                break;
+            case 'read':
+                const button = document.createElement('button');
+                button.addEventListener('click', ReadStatus);
+                button.addEventListener('click', () => {
+                    
+                    const id_number = button.parentElement.dataset.indexNumber;
+                    for(books of myLibrary){
+                        if(book.id == id_number){ 
+                              book.ChangeReadStatus();
+                              break;
+                     }      
+                     }
+                     
+                });
+                button.textContent = content ? 'Read' : 'Unread';
+                button.classList.add('ReadStatus');
+                button.classList.add(content ? 'read' : 'unread')
+                div.append(button);
+                break;
+            case 'id':
+                div.dataset.indexNumber = book[prop];
+                break;
+            case 'number_of_pages':
+                p.textContent =  `${content} pages`;
+                break;
                 default:
-                     p.textContent = content;
-                     break;
+                p.textContent = content;
+                break;
 
             }
             div.append(p);
@@ -58,14 +80,14 @@ function displayBooks(book_array){
         button.classList.add('RemoveBook');
         button.textContent = 'Delete';
         button.addEventListener('click', () => {
-            const id_number = button.parentElement.dataset.indexNumber;
-            for(books of myLibrary){
-                if(book.id == id_number){ 
-                    myLibrary.splice(myLibrary.indexOf(book), 1);
-                    break;
-                }
+        const id_number = button.parentElement.dataset.indexNumber;
+        for(books of myLibrary){
+            if(book.id == id_number){ 
+                myLibrary.splice(myLibrary.indexOf(book), 1);
+                break;
             }
-            button.parentElement.remove();
+        }
+        button.parentElement.remove();
         })
         div.append(button);
         
@@ -88,12 +110,15 @@ show_modal.addEventListener('click', () => {
     dialog.showModal();
 });
 
-read.addEventListener('click', () => {
-    if(read.textContent == 'Read') read.textContent = 'Unread';
-    else read.textContent = 'Read';
-    read.classList.toggle('read');
-    read.classList.toggle('unread');
-});
+function ReadStatus(e){
+    const target = e.target;
+    if(target.textContent == 'Read') target.textContent = 'Unread';
+    else target.textContent = 'Read';
+    target.classList.toggle('read');
+    target.classList.toggle('unread');
+}
+
+read.addEventListener('click', ReadStatus);
 
 add_book.addEventListener('click', (e) => {
     e.preventDefault();

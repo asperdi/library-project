@@ -68,9 +68,22 @@ p{
     font-size: inherit;
 }
 
-.card button:hover{
+.RemoveBook:hover{
     background-color: red;
 }
+
+.card .ReadStatus{
+    background: none;
+}
+
+.ReadStatus.read:hover{
+    background-color:  rgb(30, 160, 30);
+}
+
+.ReadStatus.unread:hover{
+    background-color:   rgb(254, 6, 6);
+}
+
 
 dialog{
     border: none;
